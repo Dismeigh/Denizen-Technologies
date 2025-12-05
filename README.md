@@ -57,7 +57,3 @@ Includes:
 - App icons in multiple sizes  
 - Favicon `.ico`
 
----
-
-## 📂 **Project Structure**
-
