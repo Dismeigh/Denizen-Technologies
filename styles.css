@@ -506,6 +506,13 @@ section p {
     margin-bottom: 10px;
 }
 
+/* Projects note text */
+.project-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    opacity: 0.9;
+}
+
 /* ---------- Services ---------- */
 
 .service-header {
