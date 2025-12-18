@@ -1,55 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Denizen Technologies | Software & Web Development</title>
+  <title>Denizen Technologies | Software & Web Development</title>
+  <meta name="description" content="Denizen Technologies builds custom software, high-performance web applications, and modern web designs." />
 
-    <!-- SEO -->
-    <meta name="description" content="Denizen Technologies builds custom software, high-performance web applications, and modern web designs that move your business forward.">
-    <link rel="canonical" href="https://denizentech.com/">
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/favicon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
 
-    <!-- Favicon -->
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/assets/favicon-16.png" sizes="16x16" type="image/png">
+  <!-- Styles (bulletproof path) -->
+  <link rel="stylesheet" href="./styles.css" />
 
-    <!-- App Icons -->
-    <link rel="apple-touch-icon" href="/assets/favicon-192.png">
-    <link rel="manifest" href="/manifest.webmanifest">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Denizen Technologies | Custom Software & Web Development">
-    <meta property="og:description" content="Software development, web development, and modern web design crafted for performance, scalability, and stunning user experience.">
-    <meta property="og:url" content="https://denizentech.com/">
-    <meta property="og:image" content="https://denizentech.com/assets/og-image.png">
-    <meta property="og:image:alt" content="Denizen Technologies hero banner">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Denizen Technologies | Custom Software & Web Development">
-    <meta name="twitter:description" content="Custom software, full-stack web development, and clean modern web design.">
-    <meta name="twitter:image" content="https://denizentech.com/assets/og-image.png">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
+  <!-- Fixed background layer (matches your portfolio) -->
+  <div class="fixed-bg" aria-hidden="true"></div>
+
   <div class="page-wrapper">
 
-    <!-- Sticky Navigation -->
+    <!-- NAV -->
     <nav class="site-nav">
-      <div class="nav-inner">
-        <a href="#top" class="nav-logo-img">
-          <!-- Put your logo file at ./assets/logo.png -->
-          <img src="assets/logo.png" alt="Denizen Technologies Logo">
+      <div class="nav-inner sweep">
+        <a href="#top" class="nav-logo-img" aria-label="Go to top">
+          <img src="assets/logo.png" alt="Denizen Technologies Logo" />
         </a>
 
         <div class="nav-links">
@@ -60,29 +44,49 @@
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </div>
+
+        <!-- Theme toggle (professional) -->
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="Switch to standard appearance"
+          title="Switch to standard appearance"
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">⚡</span>
+          <!-- Default state should be ENHANCED -->
+          <span id="toggleLabel">Enhanced Mode</span>
+        </button>
       </div>
     </nav>
 
-    <!-- Hero / Header -->
-    <header id="top">
+    <!-- HERO -->
+    <header id="top" class="hero sweep">
       <div class="header-left">
-        <div class="header-subtitle">Software • Web Development • Design</div>
+        <div class="header-subtitle">Software • Web Development • Web Design</div>
         <h1>Denizen Technologies</h1>
         <p>
-          Denizen Technologies is a small, focused studio that builds the kind of software,
-          web apps, and websites people actually enjoy using. From custom tools to complete
-          online experiences, everything is crafted for real-world performance, clarity,
-          and long-term reliability.
+          Denizen Technologies is a focused studio building modern software, web apps, and websites
+          that feel fast, clean, and reliable. From custom tools to polished online experiences,
+          we ship with performance, clarity, and long-term maintainability in mind.
         </p>
+
         <div class="header-actions">
           <a href="#contact" class="cta-btn">Start a Project</a>
-          <a href="#services" class="cta-secondary">Explore what we build</a>
+          <a href="#services" class="cta-secondary">Explore Services</a>
+        </div>
+
+        <!-- Portfolio-style pill buttons (optional but matches your vibe) -->
+        <div class="social-buttons" style="margin-top: 18px;">
+          <a class="social-btn" href="#contact">📩 Contact</a>
+          <a class="social-btn" href="#services">🧩 Services</a>
+          <a class="social-btn social-btn-github" href="https://github.com/" target="_blank" rel="noopener">💻 GitHub</a>
         </div>
       </div>
 
       <div class="header-image">
         <div class="header-image-wrapper">
-          <!-- Hero mock “dashboard” instead of a static image -->
           <div class="hero-mockup">
             <div class="mockup-window">
               <div class="mockup-bar">
@@ -90,12 +94,14 @@
                 <span class="dot amber"></span>
                 <span class="dot green"></span>
               </div>
+
               <div class="mockup-body">
                 <div class="mockup-sidebar">
                   <div class="sidebar-item active"></div>
                   <div class="sidebar-item"></div>
                   <div class="sidebar-item"></div>
                 </div>
+
                 <div class="mockup-main">
                   <div class="mockup-row">
                     <div class="mock-card wide"></div>
@@ -112,6 +118,7 @@
                 </div>
               </div>
             </div>
+
             <div class="hero-badge">
               <span class="badge-pill"></span>
               Built with care, shipped with intent
@@ -121,347 +128,204 @@
       </div>
     </header>
 
-    <!-- Services -->
-    <section id="services">
+    <!-- SERVICES -->
+    <section id="services" class="content-section sweep">
       <h2>Services</h2>
       <p>
-        Denizen Technologies delivers end-to-end digital builds across software development,
-        web development, and web design. Whether you’re refining something that already exists
-        or starting from a blank page, the goal is simple: ship tools, sites, and systems that
-        feel clean, fast, and genuinely useful.
+        End-to-end builds across custom software, full-stack web development, and modern web design.
+        Whether you’re launching a new product or upgrading an existing system, we focus on quality,
+        speed, and usability.
       </p>
 
-      <div class="section-grid">
-        <div class="card service-card">
-          <div class="service-header">
-            <div class="service-icon">
-              <!-- code icon -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 5L3 12L8 19" />
-                <path d="M16 5L21 12L16 19" />
-                <path d="M10 21L14 3" />
-              </svg>
-            </div>
-            <h3>Software Development</h3>
-          </div>
-          <p>
-            Custom software tailored to the way you actually work. From internal tools to
-            standalone products, everything is built with maintainability, scalability, and
-            clear architecture in mind.
-          </p>
-          <ul>
-            <li>Custom business applications</li>
-            <li>Backend services & APIs</li>
-            <li>Automation & integrations</li>
-            <li>Scalable, secure architecture</li>
-          </ul>
+      <div class="cards">
+        <div class="card sweep">
+          <h3>Software Development</h3>
+          <p>Custom tools and systems built for your workflow — scalable, maintainable, and secure.</p>
         </div>
 
-        <div class="card service-card">
-          <div class="service-header">
-            <div class="service-icon">
-              <!-- window icon -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="16" rx="2" />
-                <line x1="3" y1="9" x2="21" y2="9" />
-                <circle cx="7" cy="7" r="0.9" />
-                <circle cx="10" cy="7" r="0.9" />
-                <circle cx="13" cy="7" r="0.9" />
-              </svg>
-            </div>
-            <h3>Web Development</h3>
-          </div>
-          <p>
-            High-performance websites and web apps that are responsive, dependable, and built
-            to handle real traffic and real users—without feeling clunky or overcomplicated.
-          </p>
-          <ul>
-            <li>Responsive web applications</li>
-            <li>Full-stack web builds</li>
-            <li>Optimized performance</li>
-            <li>Secure deployments</li>
-          </ul>
+        <div class="card sweep">
+          <h3>Web Development</h3>
+          <p>Fast, modern sites and web apps designed for real users, real traffic, and real growth.</p>
         </div>
 
-        <div class="card service-card">
-          <div class="service-header">
-            <div class="service-icon">
-              <!-- layout icon -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="16" rx="2" />
-                <line x1="10" y1="4" x2="10" y2="20" />
-                <line x1="10" y1="11" x2="21" y2="11" />
-              </svg>
-            </div>
-            <h3>Web Design</h3>
-          </div>
-          <p>
-            Interfaces that look good and feel natural. Every layout, color, and interaction is
-            chosen to support your brand and make it easier for people to do what they came to do.
-          </p>
-          <ul>
-            <li>UI/UX design</li>
-            <li>Wireframes & prototypes</li>
-            <li>Brand-aligned visuals</li>
-            <li>Conversion-focused layouts</li>
-          </ul>
+        <div class="card sweep">
+          <h3>Web Design</h3>
+          <p>Clean, brand-aligned UI/UX that looks sharp and feels intuitive across devices.</p>
         </div>
-      </div>
-
-      <!-- Tech stack strip -->
-      <div class="tech-stack">
-        <span class="tech-label">Tech we love:</span>
-        <span>TypeScript</span>
-        <span>React</span>
-        <span>Node.js</span>
-        <span>Python</span>
-        <span>PostgreSQL</span>
-        <span>Tailwind</span>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about">
+    <!-- ABOUT -->
+    <section id="about" class="content-section sweep">
       <h2>About Denizen Technologies</h2>
       <p>
-        Denizen Technologies is a studio built around the idea that well-crafted software shouldn’t
-        feel out of reach. Behind the name is a developer who lives and breathes code, design, and
-        the little details that turn a project from “it works” into “this feels right.”
-        <br><br>
-        The focus is simple: understand what you’re trying to do, cut through the noise, and build
-        something that actually supports your day-to-day. That might be a custom internal tool,
-        a modern web app, or a complete refresh of your online presence. Everything is approached
-        with scalability, performance, and clarity in mind—so what we ship together isn’t just a
-        one-off build, it’s part of the foundation your business can grow on.
+        Denizen Technologies is built around one principle: great software should feel intentional.
+        We take the time to understand what you’re trying to accomplish, then design and build the
+        solution that fits — not a generic template. From polished landing pages to full-stack
+        applications and internal tools, our work prioritizes clarity, maintainability, and performance.
+        The goal isn’t just to launch; it’s to ship something you can confidently build on.
       </p>
     </section>
 
-    <!-- Why Choose Us -->
-    <section id="why-us">
+    <!-- WHY US -->
+    <section id="why-us" class="content-section sweep">
       <h2>Why Choose Us</h2>
-      <p>
-        Working with Denizen Technologies means partnering with someone who cares about both the
-        technical side and the human side of what you’re building. It’s not about cranking out
-        another generic template—it’s about creating something that fits how you operate and where
-        you’re trying to go.
-      </p>
-
-      <div class="section-grid value-grid">
-        <div class="card value-item">
+      <div class="cards">
+        <div class="card sweep">
           <h3>Tailored Solutions</h3>
-          <p>
-            Every project starts with listening. The result is software and sites that match your
-            goals instead of forcing you into someone else’s idea of “standard.”
-          </p>
+          <p>We build around your goals, not the other way around.</p>
         </div>
-        <div class="card value-item">
+        <div class="card sweep">
           <h3>Technical Quality</h3>
-          <p>
-            Clean, maintainable code and solid architecture so today’s decisions don’t become
-            tomorrow’s headaches.
-          </p>
+          <p>Clean architecture and readable code that’s easy to maintain.</p>
         </div>
-        <div class="card value-item">
+        <div class="card sweep">
           <h3>Design-Driven</h3>
-          <p>
-            Design isn’t a layer added at the end—it’s part of the system. That’s how you end up
-            with experiences that feel smooth, not bolted together.
-          </p>
-        </div>
-        <div class="card value-item">
-          <h3>Straightforward Communication</h3>
-          <p>
-            Clear updates, realistic timelines, and honest conversations so you always know where
-            things stand and what’s coming next.
-          </p>
+          <p>UX matters. We make things feel smooth, not stitched together.</p>
         </div>
       </div>
     </section>
 
-    <!-- Process -->
-    <section id="process">
+    <!-- PROCESS -->
+    <section id="process" class="content-section sweep">
       <h2>How We Work</h2>
-      <p>
-        The process is designed to stay collaborative and grounded while still moving forward
-        steadily. No mystery, no black box—just a clear path from idea to launch.
-      </p>
-
-      <div class="process-steps">
-        <div class="process-step">
-          <span class="step-number">01</span>
+      <div class="cards">
+        <div class="card sweep">
           <h3>Discovery</h3>
-          <p>
-            We dig into your goals, your users, and the problems you’re trying to solve so we’re
-            working on the right thing from the start.
-          </p>
+          <p>Clarify goals, scope, and priorities so we build the right thing.</p>
         </div>
-        <div class="process-step">
-          <span class="step-number">02</span>
+        <div class="card sweep">
           <h3>Design</h3>
-          <p>
-            Flows, wireframes, and interfaces come together to map out how everything should look
-            and feel before a single line of production code is written.
-          </p>
+          <p>Structure and UI planning so the build is clean and intentional.</p>
         </div>
-        <div class="process-step">
-          <span class="step-number">03</span>
-          <h3>Development</h3>
-          <p>
-            The plan turns into real, working software using modern, reliable technologies—with an
-            eye on performance, security, and maintainability.
-          </p>
+        <div class="card sweep">
+          <h3>Build</h3>
+          <p>Modern implementation with performance and scalability in mind.</p>
         </div>
-        <div class="process-step">
-          <span class="step-number">04</span>
-          <h3>Launch & Support</h3>
-          <p>
-            Once everything is live, we help monitor, adjust, and refine so your product stays
-            stable, useful, and ready for what’s next.
-          </p>
+        <div class="card sweep">
+          <h3>Launch</h3>
+          <p>Deploy, verify, and refine so it stays stable and ready to grow.</p>
         </div>
       </div>
     </section>
 
-    <!-- Projects (Coming Soon) -->
-    <section id="projects">
+    <!-- PROJECTS -->
+    <section id="projects" class="content-section sweep">
       <h2>Projects</h2>
-      <p>
-        A proper case-study section is in the works. Until then, here’s a glimpse at the kind
-        of work Denizen Technologies is built to handle.
-      </p>
-
-      <div class="section-grid">
-        <div class="card">
+      <p>Case studies are coming soon. Here’s the kind of work we’re built to deliver.</p>
+      <div class="cards">
+        <div class="card sweep">
           <h3>Operational Dashboards</h3>
-          <p>
-            Internal tools and dashboards that give teams real-time visibility into what matters,
-            without drowning them in noise.
-          </p>
-          <p class="project-note">Coming soon &mdash; live examples and walkthroughs.</p>
+          <p>Internal tools for visibility, speed, and decision-making.</p>
         </div>
-        <div class="card">
-          <h3>Marketing & Brand Sites</h3>
-          <p>
-            Clean, fast websites that put your story, offers, and visuals in the spotlight while
-            staying easy to maintain behind the scenes.
-          </p>
-          <p class="project-note">Coming soon &mdash; before/after redesign stories.</p>
+        <div class="card sweep">
+          <h3>Brand & Marketing Sites</h3>
+          <p>Clean, modern sites that present your offer clearly and convert.</p>
         </div>
-        <div class="card">
-          <h3>Custom Web Applications</h3>
-          <p>
-            Fully custom web apps designed around specific workflows, from client portals to
-            booking systems and everything in between.
-          </p>
-          <p class="project-note">Coming soon &mdash; feature breakdowns and architecture notes.</p>
+        <div class="card sweep">
+          <h3>Custom Web Apps</h3>
+          <p>Portals, systems, and workflows made specifically for your users.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
+    <!-- CONTACT -->
+    <section id="contact" class="content-section sweep">
       <h2>Contact</h2>
       <p>
-        If you’ve got a project in mind or an idea you want to explore, share a bit about it below.
-        You’ll get a thoughtful response, not a copy-paste sales script.
+        Tell us what you’re building. You’ll get a thoughtful reply — not a copy/paste sales script.
       </p>
 
       <div class="contact-layout">
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form sweep" id="contact-form">
           <div class="form-row">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name">
+            <input id="name" name="name" type="text" placeholder="Your name" />
           </div>
+
           <div class="form-row">
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com">
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
           </div>
+
           <div class="form-row">
-            <label for="project">Project Details</label>
-            <textarea id="project" name="message" rows="4" placeholder="Tell me about your project, goals, and timeline."></textarea>
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" rows="4" placeholder="Goals, timeline, and what you need built..."></textarea>
           </div>
+
           <button type="submit" class="cta-btn form-btn">Send Message</button>
           <p class="form-status" id="form-status"></p>
         </form>
 
-        <div class="contact-info">
+        <div class="contact-info sweep">
           <h3>Direct Contact</h3>
-          <p>Email: <a href="mailto:denizen.technologies@gmail.com">denizen.technologies@gmail.com</a></p>
-          <p>Discord: <a href="https://discord.gg/3EQZ3uxPyv" target="_blank" rel="noopener">Join our Discord server</a></p>
-          <p>Location: Remote-first, available for clients worldwide.</p>
+          <p>Email: <a href="mailto:info@denizentech.com">info@denizentech.com</a></p>
+          <p>Discord: <a href="https://discord.gg/your-server-code" target="_blank" rel="noopener">Join our Discord server</a></p>
+          <p>Location: Remote-first, available worldwide.</p>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="footer-content">
-        <p class="footer-brand">© <span id="year"></span> Denizen Technologies. All rights reserved.</p>
-        <div class="footer-links">
-          <a href="mailto:denizen.technologies@gmail.com">denizen.technologies@gmail.com</a>
-          <a href="https://discord.gg/3EQZ3uxPyv" target="_blank" rel="noopener">Discord</a>
-          <a href="#top">Back to top</a>
-        </div>
-      </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+      © <span id="year"></span> Denizen Technologies. All rights reserved.
     </footer>
-
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // ---- Footer year ----
-      const yearSpan = document.getElementById('year');
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+    document.addEventListener("DOMContentLoaded", () => {
+      // Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ===== Theme Toggle (portfolio behavior)
+      // Enhanced (default): no class
+      // Standard: body.theme-normal ON
+      const body = document.body;
+      const btn = document.getElementById("themeToggle");
+      const label = document.getElementById("toggleLabel");
+      const icon = btn.querySelector(".theme-toggle-icon");
+
+      // IMPORTANT: default is "enhanced"
+      const saved = localStorage.getItem("denizen_theme_mode");
+      if (saved === "standard") body.classList.add("theme-normal");
+
+      function syncToggleUI() {
+        const isStandard = body.classList.contains("theme-normal");
+        btn.setAttribute("aria-pressed", isStandard ? "true" : "false");
+
+        // When standard is ON, button should offer enhanced
+        label.textContent = isStandard ? "Standard Mode" : "Enhanced Mode";
+        icon.textContent = isStandard ? "✨" : "⚡";
+
+        btn.title = isStandard ? "Switch to enhanced visual experience" : "Switch to standard appearance";
+        btn.setAttribute("aria-label", btn.title);
       }
 
-      // ---- Scroll reveal (header + sections) ----
-      const revealElements = document.querySelectorAll('header, section');
+      syncToggleUI();
 
-      revealElements.forEach((el, index) => {
-        el.classList.add('reveal');
-        el.style.transitionDelay = (index * 0.06) + 's';
+      btn.addEventListener("click", () => {
+        body.classList.toggle("theme-normal");
+        localStorage.setItem("denizen_theme_mode", body.classList.contains("theme-normal") ? "standard" : "enhanced");
+        syncToggleUI();
       });
 
-      const revealObserver = new IntersectionObserver((entries, obs) => {
+      // ===== Scroll-triggered Glow Sweep (re-triggers)
+      const sweepEls = document.querySelectorAll(".sweep");
+      const sweepObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            obs.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) entry.target.classList.add("in-view");
+          else entry.target.classList.remove("in-view");
         });
-      }, {
-        threshold: 0.15
-      });
+      }, { threshold: 0.2 });
 
-      revealElements.forEach(el => revealObserver.observe(el));
+      sweepEls.forEach(el => sweepObserver.observe(el));
 
-      // ---- Active nav link highlighting ----
-      const sections = document.querySelectorAll('header#top, section[id]');
-      const navLinks = document.querySelectorAll('.nav-links a');
-
-      const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id') || 'top';
-            navLinks.forEach(link => {
-              const href = link.getAttribute('href');
-              link.classList.toggle('active', href === '#' + id);
-            });
-          }
-        });
-      }, {
-        threshold: 0.4
-      });
-
-      sections.forEach(section => navObserver.observe(section));
-
-      // ---- Contact form handling (Formspree) ----
-      const form = document.getElementById('contact-form');
-      const statusEl = document.getElementById('form-status');
+      // ===== Contact form (optional Formspree)
+      const form = document.getElementById("contact-form");
+      const statusEl = document.getElementById("form-status");
 
       if (form && statusEl) {
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener("submit", async (e) => {
           e.preventDefault();
 
           const name = form.querySelector('[name="name"]').value.trim();
@@ -469,46 +333,42 @@
           const message = form.querySelector('[name="message"]').value.trim();
 
           if (!name || !email || !message) {
-            statusEl.textContent = 'Please fill out all fields.';
-            statusEl.classList.remove('success');
-            statusEl.classList.add('error');
+            statusEl.textContent = "Please fill out all fields.";
+            statusEl.className = "form-status error";
             return;
           }
 
           const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailPattern.test(email)) {
-            statusEl.textContent = 'Please enter a valid email address.';
-            statusEl.classList.remove('success');
-            statusEl.classList.add('error');
+            statusEl.textContent = "Please enter a valid email address.";
+            statusEl.className = "form-status error";
             return;
           }
 
-          statusEl.textContent = 'Sending...';
-          statusEl.classList.remove('success', 'error');
+          statusEl.textContent = "Sending...";
+          statusEl.className = "form-status";
 
           try {
-            const endpoint = 'https://formspree.io/f/xnnezblk';
+            const endpoint = "https://formspree.io/f/YOUR_FORM_ID_HERE";
             const formData = new FormData(form);
+
             const response = await fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Accept': 'application/json' },
+              method: "POST",
+              headers: { "Accept": "application/json" },
               body: formData
             });
 
             if (response.ok) {
-              statusEl.textContent = 'Thanks! Your message has been sent.';
-              statusEl.classList.remove('error');
-              statusEl.classList.add('success');
+              statusEl.textContent = "Thanks! Your message has been sent.";
+              statusEl.className = "form-status success";
               form.reset();
             } else {
-              statusEl.textContent = 'Something went wrong. Please try again.';
-              statusEl.classList.remove('success');
-              statusEl.classList.add('error');
+              statusEl.textContent = "Something went wrong. Please try again.";
+              statusEl.className = "form-status error";
             }
-          } catch (err) {
-            statusEl.textContent = 'Network error. Please try again later.';
-            statusEl.classList.remove('success');
-            statusEl.classList.add('error');
+          } catch {
+            statusEl.textContent = "Network error. Please try again later.";
+            statusEl.className = "form-status error";
           }
         });
       }
