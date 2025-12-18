@@ -24,7 +24,7 @@
 </head>
 
 <body>
-  <!-- Fixed background layer (matches your portfolio) -->
+  <!-- Fixed background layer -->
   <div class="fixed-bg" aria-hidden="true"></div>
 
   <div class="page-wrapper">
@@ -45,7 +45,7 @@
           <a href="#contact">Contact</a>
         </div>
 
-        <!-- Theme toggle (professional) -->
+        <!-- Theme toggle -->
         <button
           class="theme-toggle"
           id="themeToggle"
@@ -67,12 +67,12 @@
         <h1>Denizen Technologies</h1>
 
         <p class="hero-copy">
-          Denizen Technologies is a focused studio building modern software, web apps, and
-          websites that feel fast, clean, and reliable. From custom tools to polished online
-          experiences, we ship with performance, clarity, and long-term maintainability in mind.
+          Denizen Technologies is a focused studio building modern software, web apps, and websites
+          that feel fast, clean, and reliable. From custom tools to polished online experiences,
+          we ship with performance, clarity, and long-term maintainability in mind.
         </p>
 
-        <!-- Hero CTAs: Start + Services + Contact -->
+        <!-- Hero CTAs: Start + Services + Contact (NO GitHub) -->
         <div class="header-actions">
           <a href="#contact" class="cta-btn">Start a Project</a>
           <a href="#services" class="cta-secondary">Services</a>
@@ -270,18 +270,19 @@
       // Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Theme Toggle
-      // Standard Mode = body.theme-normal ON
       const body = document.body;
+
+      // ===== Theme Toggle
       const btn = document.getElementById("themeToggle");
       const label = document.getElementById("toggleLabel");
-      const icon = btn.querySelector(".theme-toggle-icon");
+      const icon = btn?.querySelector(".theme-toggle-icon");
 
       const saved = localStorage.getItem("denizen_theme_mode");
       if (saved === "standard") body.classList.add("theme-normal");
 
       function syncToggleUI() {
         const isStandard = body.classList.contains("theme-normal");
+        if (!btn || !label || !icon) return;
         btn.setAttribute("aria-pressed", isStandard ? "true" : "false");
         label.textContent = isStandard ? "Standard Mode" : "Enhanced Mode";
         icon.textContent = isStandard ? "✨" : "⚡";
@@ -291,7 +292,7 @@
 
       syncToggleUI();
 
-      btn.addEventListener("click", () => {
+      btn?.addEventListener("click", () => {
         body.classList.toggle("theme-normal");
         localStorage.setItem("denizen_theme_mode", body.classList.contains("theme-normal") ? "standard" : "enhanced");
         syncToggleUI();
@@ -307,6 +308,48 @@
       }, { threshold: 0.2 });
 
       sweepEls.forEach(el => sweepObserver.observe(el));
+
+      // =========================================================
+      // 1) Sticky shrinking nav on scroll (adds body.scrolled)
+      // 2) Subtle parallax (sets CSS variable --parallax-y)
+      // =========================================================
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const heroMockup = document.querySelector(".hero-mockup");
+      let ticking = false;
+
+      function onScroll() {
+        const y = window.scrollY || 0;
+
+        // Nav shrink toggle
+        if (y > 30) body.classList.add("scrolled");
+        else body.classList.remove("scrolled");
+
+        // Parallax (disable for reduced motion)
+        if (!reduceMotion.matches) {
+          const parallax = Math.max(-40, Math.min(0, -y * 0.12)); // clamp [-40..0]
+          body.style.setProperty("--parallax-y", parallax.toFixed(2) + "px");
+
+          // Tiny hero mockup lift early
+          if (heroMockup) {
+            const lift = Math.max(-18, Math.min(0, -y * 0.04));
+            heroMockup.style.transform = `translate3d(0, ${lift.toFixed(2)}px, 0)`;
+          }
+        } else {
+          body.style.removeProperty("--parallax-y");
+          if (heroMockup) heroMockup.style.transform = "";
+        }
+
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      onScroll();
 
       // ===== Contact form (optional Formspree)
       const form = document.getElementById("contact-form");
@@ -337,7 +380,6 @@
           statusEl.className = "form-status";
 
           try {
-            // Replace with your Formspree endpoint
             const endpoint = "https://formspree.io/f/YOUR_FORM_ID_HERE";
             const formData = new FormData(form);
 
