@@ -23,14 +23,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="theme-enhanced">
   <!-- Fixed background layer -->
   <div class="fixed-bg" aria-hidden="true"></div>
 
   <div class="page-wrapper">
 
     <!-- NAV -->
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Site navigation">
       <div class="nav-inner sweep">
         <a href="#top" class="nav-logo-img" aria-label="Go to top">
           <img src="assets/logo.png" alt="Denizen Technologies Logo" />
@@ -45,13 +45,13 @@
           <a href="#contact">Contact</a>
         </div>
 
-        <!-- Scroll hint (mobile) -->
+        <!-- Subtle overflow hint for mobile (no text) -->
         <div class="nav-hint" aria-hidden="true">
-          <span class="arrow">‹</span>
-          <span>Swipe</span>
-          <span class="arrow">›</span>
+          <span class="nav-chev">‹</span>
+          <span class="nav-chev">›</span>
         </div>
 
+        <!-- Theme toggle -->
         <button
           class="theme-toggle"
           id="themeToggle"
@@ -275,19 +275,18 @@
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Theme Toggle (Enhanced vs Standard)
-      // Enhanced = default (no class)
-      // Standard  = body.theme-normal
+      // ===== Theme Toggle (Explicit: Enhanced vs Standard)
       const body = document.body;
       const btn = document.getElementById("themeToggle");
       const label = document.getElementById("toggleLabel");
       const icon = btn.querySelector(".theme-toggle-icon");
 
       const saved = localStorage.getItem("denizen_theme_mode");
-      if (saved === "standard") body.classList.add("theme-normal");
+      body.classList.remove("theme-enhanced", "theme-standard");
+      body.classList.add(saved === "standard" ? "theme-standard" : "theme-enhanced");
 
       function syncToggleUI() {
-        const isStandard = body.classList.contains("theme-normal");
+        const isStandard = body.classList.contains("theme-standard");
         btn.setAttribute("aria-pressed", isStandard ? "true" : "false");
         label.textContent = isStandard ? "Standard Mode" : "Enhanced Mode";
         icon.textContent = isStandard ? "✨" : "⚡";
@@ -298,8 +297,10 @@
       syncToggleUI();
 
       btn.addEventListener("click", () => {
-        body.classList.toggle("theme-normal");
-        localStorage.setItem("denizen_theme_mode", body.classList.contains("theme-normal") ? "standard" : "enhanced");
+        const isStandard = body.classList.contains("theme-standard");
+        body.classList.toggle("theme-standard", !isStandard);
+        body.classList.toggle("theme-enhanced", isStandard);
+        localStorage.setItem("denizen_theme_mode", isStandard ? "enhanced" : "standard");
         syncToggleUI();
       });
 
@@ -325,19 +326,15 @@
         if (y > 10) document.body.classList.add("scrolled");
         else document.body.classList.remove("scrolled");
 
-        // Direction logic (ignore tiny jitters)
         const delta = y - lastY;
 
         if (y < 80) {
-          // Near top: always show
           document.body.classList.remove("nav-hidden");
           document.body.classList.add("nav-shown");
         } else if (delta > 8) {
-          // Scrolling down: hide
           document.body.classList.add("nav-hidden");
           document.body.classList.remove("nav-shown");
         } else if (delta < -8) {
-          // Scrolling up: show
           document.body.classList.remove("nav-hidden");
           document.body.classList.add("nav-shown");
         }
@@ -385,7 +382,6 @@
           statusEl.className = "form-status";
 
           try {
-            // Replace with your Formspree endpoint
             const endpoint = "https://formspree.io/f/YOUR_FORM_ID_HERE";
             const formData = new FormData(form);
 
