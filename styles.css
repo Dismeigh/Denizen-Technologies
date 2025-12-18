@@ -625,3 +625,44 @@ input:focus, textarea:focus {
 @media (prefers-reduced-motion: reduce) {
   .sweep.in-view::after { animation: none !important; }
 }
+
+/* ===== HARD NAV OVERRIDES (fixes oval + stacking on mobile Chrome) ===== */
+.site-nav { padding: 0.6rem 0.75rem !important; }
+
+.nav-inner{
+  border-radius: 18px !important;     /* prevents pill shape */
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.nav-logo-img{ flex: 0 0 auto !important; }
+
+.nav-links{
+  flex: 1 1 auto !important;
+  min-width: 0 !important;            /* KEY: allows shrinking instead of wrapping */
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  gap: 0.75rem !important;
+}
+
+.nav-links a{
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+.theme-toggle{
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+/* If any old CSS forces a "pill" or column layout on small screens, this wins */
+@media (max-width: 768px){
+  .nav-inner{ border-radius: 18px !important; }
+  .nav-links{ max-width: 100% !important; }
+}
