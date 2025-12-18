@@ -24,7 +24,7 @@
 </head>
 
 <body>
-  <!-- Fixed background layer -->
+  <!-- Fixed background layer (matches your portfolio vibe) -->
   <div class="fixed-bg" aria-hidden="true"></div>
 
   <div class="page-wrapper">
@@ -36,7 +36,7 @@
           <img src="assets/logo.png" alt="Denizen Technologies Logo" />
         </a>
 
-        <div class="nav-links">
+        <div class="nav-links" aria-label="Primary navigation">
           <a href="#services">Services</a>
           <a href="#about">About</a>
           <a href="#why-us">Why Us</a>
@@ -45,7 +45,7 @@
           <a href="#contact">Contact</a>
         </div>
 
-        <!-- Theme toggle -->
+        <!-- Theme toggle (professional) -->
         <button
           class="theme-toggle"
           id="themeToggle"
@@ -72,7 +72,6 @@
           we ship with performance, clarity, and long-term maintainability in mind.
         </p>
 
-        <!-- Hero CTAs: Start + Services + Contact (NO GitHub) -->
         <div class="header-actions">
           <a href="#contact" class="cta-btn">Start a Project</a>
           <a href="#services" class="cta-secondary">Services</a>
@@ -82,7 +81,7 @@
 
       <div class="header-image">
         <div class="header-image-wrapper">
-          <div class="hero-mockup">
+          <div class="hero-mockup" id="heroMockup">
             <div class="mockup-window">
               <div class="mockup-bar">
                 <span class="dot red"></span>
@@ -252,7 +251,7 @@
 
         <div class="contact-info sweep">
           <h3>Direct Contact</h3>
-          <p>Email: <a href="mailto:info@denizentech.com">info@denizentech.com</a></p>
+          <p>Email: <a href="mailto:info@denizen-tech.com">info@denizen-tech.com</a></p>
           <p>Discord: <a href="https://discord.gg/your-server-code" target="_blank" rel="noopener">Join our Discord server</a></p>
           <p>Location: Remote-first, available worldwide.</p>
         </div>
@@ -270,29 +269,27 @@
       // Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      const body = document.body;
-
       // ===== Theme Toggle
+      // Standard Mode = body.theme-normal ON
+      const body = document.body;
       const btn = document.getElementById("themeToggle");
       const label = document.getElementById("toggleLabel");
-      const icon = btn?.querySelector(".theme-toggle-icon");
+      const icon = btn.querySelector(".theme-toggle-icon");
 
       const saved = localStorage.getItem("denizen_theme_mode");
       if (saved === "standard") body.classList.add("theme-normal");
 
       function syncToggleUI() {
         const isStandard = body.classList.contains("theme-normal");
-        if (!btn || !label || !icon) return;
         btn.setAttribute("aria-pressed", isStandard ? "true" : "false");
         label.textContent = isStandard ? "Standard Mode" : "Enhanced Mode";
         icon.textContent = isStandard ? "✨" : "⚡";
         btn.title = isStandard ? "Toggle enhanced visual experience" : "Toggle standard appearance";
         btn.setAttribute("aria-label", btn.title);
       }
-
       syncToggleUI();
 
-      btn?.addEventListener("click", () => {
+      btn.addEventListener("click", () => {
         body.classList.toggle("theme-normal");
         localStorage.setItem("denizen_theme_mode", body.classList.contains("theme-normal") ? "standard" : "enhanced");
         syncToggleUI();
@@ -306,50 +303,23 @@
           else entry.target.classList.remove("in-view");
         });
       }, { threshold: 0.2 });
-
       sweepEls.forEach(el => sweepObserver.observe(el));
 
-      // =========================================================
-      // 1) Sticky shrinking nav on scroll (adds body.scrolled)
-      // 2) Subtle parallax (sets CSS variable --parallax-y)
-      // =========================================================
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const heroMockup = document.querySelector(".hero-mockup");
-      let ticking = false;
-
-      function onScroll() {
-        const y = window.scrollY || 0;
-
-        // Nav shrink toggle
-        if (y > 30) body.classList.add("scrolled");
-        else body.classList.remove("scrolled");
-
-        // Parallax (disable for reduced motion)
-        if (!reduceMotion.matches) {
-          const parallax = Math.max(-40, Math.min(0, -y * 0.12)); // clamp [-40..0]
-          body.style.setProperty("--parallax-y", parallax.toFixed(2) + "px");
-
-          // Tiny hero mockup lift early
-          if (heroMockup) {
-            const lift = Math.max(-18, Math.min(0, -y * 0.04));
-            heroMockup.style.transform = `translate3d(0, ${lift.toFixed(2)}px, 0)`;
-          }
-        } else {
-          body.style.removeProperty("--parallax-y");
-          if (heroMockup) heroMockup.style.transform = "";
-        }
-
-        ticking = false;
-      }
-
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          window.requestAnimationFrame(onScroll);
-          ticking = true;
-        }
-      }, { passive: true });
-
+      // ===== Compact nav on scroll
+      const onScroll = () => {
+        if (window.scrollY > 10) document.body.classList.add("scrolled");
+        else document.body.classList.remove("scrolled");
+      };
       onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // ===== Light parallax background
+      const parallax = () => {
+        const y = Math.min(window.scrollY * 0.12, 80);
+        document.documentElement.style.setProperty("--parallax-y", `${-y}px`);
+      };
+      parallax();
+      window.addEventListener("scroll", parallax, { passive: true });
 
       // ===== Contact form (optional Formspree)
       const form = document.getElementById("contact-form");
@@ -369,7 +339,7 @@
             return;
           }
 
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
           if (!emailPattern.test(email)) {
             statusEl.textContent = "Please enter a valid email address.";
             statusEl.className = "form-status error";
@@ -380,6 +350,8 @@
           statusEl.className = "form-status";
 
           try {
+            // Replace with your Formspree endpoint if you want live submissions:
+            // https://formspree.io/
             const endpoint = "https://formspree.io/f/YOUR_FORM_ID_HERE";
             const formData = new FormData(form);
 
