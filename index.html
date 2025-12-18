@@ -14,8 +14,8 @@
   <link rel="apple-touch-icon" href="assets/favicon-192.png" />
   <link rel="manifest" href="manifest.webmanifest" />
 
-  <!-- Styles (bulletproof path) -->
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,11 +51,10 @@
           id="themeToggle"
           type="button"
           aria-pressed="false"
-          aria-label="Switch to standard appearance"
-          title="Switch to standard appearance"
+          aria-label="Toggle standard appearance"
+          title="Toggle standard appearance"
         >
           <span class="theme-toggle-icon" aria-hidden="true">⚡</span>
-          <!-- Default state should be ENHANCED -->
           <span id="toggleLabel">Enhanced Mode</span>
         </button>
       </div>
@@ -66,19 +65,20 @@
       <div class="header-left">
         <div class="header-subtitle">Software • Web Development • Web Design</div>
         <h1>Denizen Technologies</h1>
-        <p>
-          Denizen Technologies is a focused studio building modern software, web apps, and websites
-          that feel fast, clean, and reliable. From custom tools to polished online experiences,
-          we ship with performance, clarity, and long-term maintainability in mind.
+
+        <p class="hero-copy">
+          Denizen Technologies is a focused studio building modern software, web apps, and
+          websites that feel fast, clean, and reliable. From custom tools to polished online
+          experiences, we ship with performance, clarity, and long-term maintainability in mind.
         </p>
 
+        <!-- Only ONE hero CTA now -->
         <div class="header-actions">
           <a href="#contact" class="cta-btn">Start a Project</a>
-          <a href="#services" class="cta-secondary">Explore Services</a>
         </div>
 
-        <!-- Portfolio-style pill buttons (optional but matches your vibe) -->
-        <div class="social-buttons" style="margin-top: 18px;">
+        <!-- Portfolio-style pill buttons -->
+        <div class="social-buttons hero-pills">
           <a class="social-btn" href="#contact">📩 Contact</a>
           <a class="social-btn" href="#services">🧩 Services</a>
           <a class="social-btn social-btn-github" href="https://github.com/" target="_blank" rel="noopener">💻 GitHub</a>
@@ -232,9 +232,7 @@
     <!-- CONTACT -->
     <section id="contact" class="content-section sweep">
       <h2>Contact</h2>
-      <p>
-        Tell us what you’re building. You’ll get a thoughtful reply — not a copy/paste sales script.
-      </p>
+      <p>Tell us what you’re building. You’ll get a thoughtful reply — not a copy/paste sales script.</p>
 
       <div class="contact-layout">
         <form class="contact-form sweep" id="contact-form">
@@ -277,27 +275,22 @@
       // Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Theme Toggle (portfolio behavior)
-      // Enhanced (default): no class
-      // Standard: body.theme-normal ON
+      // ===== Theme Toggle (matches portfolio behavior)
+      // Standard Mode = body.theme-normal ON
       const body = document.body;
       const btn = document.getElementById("themeToggle");
       const label = document.getElementById("toggleLabel");
       const icon = btn.querySelector(".theme-toggle-icon");
 
-      // IMPORTANT: default is "enhanced"
       const saved = localStorage.getItem("denizen_theme_mode");
       if (saved === "standard") body.classList.add("theme-normal");
 
       function syncToggleUI() {
         const isStandard = body.classList.contains("theme-normal");
         btn.setAttribute("aria-pressed", isStandard ? "true" : "false");
-
-        // When standard is ON, button should offer enhanced
         label.textContent = isStandard ? "Standard Mode" : "Enhanced Mode";
         icon.textContent = isStandard ? "✨" : "⚡";
-
-        btn.title = isStandard ? "Switch to enhanced visual experience" : "Switch to standard appearance";
+        btn.title = isStandard ? "Toggle enhanced visual experience" : "Toggle standard appearance";
         btn.setAttribute("aria-label", btn.title);
       }
 
@@ -338,7 +331,7 @@
             return;
           }
 
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
           if (!emailPattern.test(email)) {
             statusEl.textContent = "Please enter a valid email address.";
             statusEl.className = "form-status error";
@@ -349,6 +342,7 @@
           statusEl.className = "form-status";
 
           try {
+            // Replace with your Formspree endpoint
             const endpoint = "https://formspree.io/f/YOUR_FORM_ID_HERE";
             const formData = new FormData(form);
 
