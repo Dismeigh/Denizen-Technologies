@@ -45,6 +45,13 @@
           <a href="#contact">Contact</a>
         </div>
 
+        <!-- Scroll hint (mobile) -->
+        <div class="nav-hint" aria-hidden="true">
+          <span class="arrow">‹</span>
+          <span>Swipe</span>
+          <span class="arrow">›</span>
+        </div>
+
         <button
           class="theme-toggle"
           id="themeToggle"
@@ -268,7 +275,9 @@
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Theme Toggle
+      // ===== Theme Toggle (Enhanced vs Standard)
+      // Enhanced = default (no class)
+      // Standard  = body.theme-normal
       const body = document.body;
       const btn = document.getElementById("themeToggle");
       const label = document.getElementById("toggleLabel");
@@ -305,12 +314,46 @@
 
       sweepEls.forEach(el => sweepObserver.observe(el));
 
-      // ===== Compact nav on scroll (make it thin)
-      const onScroll = () => {
-        if (window.scrollY > 10) document.body.classList.add("scrolled");
+      // ===== Compact + Auto-hide nav on scroll (down hides, up shows)
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      const updateNavOnScroll = () => {
+        const y = window.scrollY;
+
+        // Thin mode
+        if (y > 10) document.body.classList.add("scrolled");
         else document.body.classList.remove("scrolled");
+
+        // Direction logic (ignore tiny jitters)
+        const delta = y - lastY;
+
+        if (y < 80) {
+          // Near top: always show
+          document.body.classList.remove("nav-hidden");
+          document.body.classList.add("nav-shown");
+        } else if (delta > 8) {
+          // Scrolling down: hide
+          document.body.classList.add("nav-hidden");
+          document.body.classList.remove("nav-shown");
+        } else if (delta < -8) {
+          // Scrolling up: show
+          document.body.classList.remove("nav-hidden");
+          document.body.classList.add("nav-shown");
+        }
+
+        lastY = y;
+        ticking = false;
       };
-      onScroll();
+
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateNavOnScroll);
+          ticking = true;
+        }
+      };
+
+      updateNavOnScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
 
       // ===== Contact form (optional Formspree)
