@@ -72,16 +72,11 @@
           experiences, we ship with performance, clarity, and long-term maintainability in mind.
         </p>
 
-        <!-- Only ONE hero CTA now -->
+        <!-- Hero CTAs: Start + Services + Contact -->
         <div class="header-actions">
           <a href="#contact" class="cta-btn">Start a Project</a>
-        </div>
-
-        <!-- Portfolio-style pill buttons -->
-        <div class="social-buttons hero-pills">
-          <a class="social-btn" href="#contact">📩 Contact</a>
-          <a class="social-btn" href="#services">🧩 Services</a>
-          <a class="social-btn social-btn-github" href="https://github.com/" target="_blank" rel="noopener">💻 GitHub</a>
+          <a href="#services" class="cta-secondary">Services</a>
+          <a href="#contact" class="cta-secondary">Contact</a>
         </div>
       </div>
 
@@ -275,7 +270,7 @@
       // Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // ===== Theme Toggle (matches portfolio behavior)
+      // ===== Theme Toggle
       // Standard Mode = body.theme-normal ON
       const body = document.body;
       const btn = document.getElementById("themeToggle");
@@ -331,7 +326,7 @@
             return;
           }
 
-          const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailPattern.test(email)) {
             statusEl.textContent = "Please enter a valid email address.";
             statusEl.className = "form-status error";
